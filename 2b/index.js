@@ -7,10 +7,11 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   const query = url.parse(req.url, true).query;
   const sum = String (query.fullname);
-  let name = "dfsfsfsd";
+  let name;
   const substringArray = sum.split(" ");  
 
   const l = substringArray.length;
+
   switch(l){	
   case 1:
   if (String(substringArray[0].toString()) != "")
@@ -36,7 +37,6 @@ const server = http.createServer((req, res) => {
  
   res.end(name);
 });
-
 
 
 server.listen(port, hostname, () => {
