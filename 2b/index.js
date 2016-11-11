@@ -7,10 +7,8 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   const query = url.parse(req.url, true).query;
   const sum = String (query.fullname);
-  let name;
-  //const sum1 = "Steven Paul Jobs";
-  const substringArray = sum.split(" ");
-  
+  let name = "dfsfsfsd";
+  const substringArray = sum.split(" ");  
 
   const l = substringArray.length;
   switch(l){	
@@ -35,10 +33,7 @@ const server = http.createServer((req, res) => {
   res.setHeader('access-control-allow-headers', 'content-type, accept');
   res.setHeader('Content-Type', 'text/plain');
   res.statusCode = 200;
-  
-  //res.end(sum);
-
-  //res.end(substringArray[0].toString());
+ 
   res.end(name);
 });
 
