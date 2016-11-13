@@ -19,11 +19,13 @@ const server = http.createServer((req, res) => {
   
   console.log(sum);
 
-  const substringArray = sum.split("/");
+  const substringArray = sum.split(/[/\?]/g);
+  console.log(`FFFFFF ${substringArray[1]}`);
+
   const l = substringArray.length;
   for (i = 0; i < l; i ++)
   {
-  if (!(/[^A-Za-z0-9_.@]/g.test(substringArray[i]) ||
+  if (!(/[^A-Za-z0-9_.@?]/g.test(substringArray[i]) ||
    /https/g.test(substringArray[i]) ||
     /http/g.test(substringArray[i]) ||
      /.com/g.test(substringArray[i]) ||
@@ -35,14 +37,12 @@ const server = http.createServer((req, res) => {
   {preName = "fuck";}
   }
 
-  const substringArray1 = preName.split(/"?"/g);
-  let preName1 = substringArray1[0];
-  if (String(substringArray1[0].charAt(0)) == "@")
+  if (String(preName.charAt(0)) == "@")
   {
-    preName1 = substringArray1[0];
+    preName1 = preName;
   }else
 {
-    preName1 = "@" + substringArray1[0];
+    preName1 = "@" + preName;
 }
 
   console.log(`<-- ${sum}`);
