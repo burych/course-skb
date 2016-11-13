@@ -11,10 +11,6 @@ const server = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   res.statusCode = 200;
 
-
-  function checkSymbols(name) {
-  return !((/\d|_|\//g).test(name));
-}
   console.log(`--> ${req.url}`);
 
   const query = url.parse(req.url, true).query;
@@ -25,11 +21,18 @@ const server = http.createServer((req, res) => {
 
   const substringArray = sum.split("/");
   const l = substringArray.length;
-  if (/[^A-Za-z0-9_.@]/g.test(substringArray[l-1]))
+  for (i = 0; i < l; i ++)
   {
-    preName = substringArray[l-2];
-  }else{
-    preName = substringArray[l-1]
+  if (!(/[^A-Za-z0-9_.@]/g.test(substringArray[i]) ||
+   /https/g.test(substringArray[i]) ||
+    /http/g.test(substringArray[i]) ||
+     /.com/g.test(substringArray[i]) ||
+    (substringArray[i].length == 0) ))
+  {
+    preName = substringArray[i];
+    break;
+  }else
+  {preName = "fuck";}
   }
 
   const substringArray1 = preName.split(/"?"/g);
@@ -43,7 +46,7 @@ const server = http.createServer((req, res) => {
 }
 
   console.log(`<-- ${sum}`);
-  res.end(preName1);
+  res.end(String((preName1)));
 });
 
 
